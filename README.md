@@ -19,6 +19,6 @@ A Telegram robot for easy management of Telegram and prevention of spam of peopl
 ##Database Structure
 Name | Type | Collation | Null | Default |Extra
 ------------ | ------------- | ------------- | ------------- | ------------- | -------------
-id | int(100) |  | No | None | AUTO_INCREMENT
-user | varchar(100) | latin1_swedish_ci | No | None |
-ekhtar | int(5) |  | No | None | 
+id | int(100) | - | No | None | AUTO_INCREMENT
+user | varchar(100) | latin1_swedish_ci | No | None | -
+ekhtar | int(5) | - | No | None | -
