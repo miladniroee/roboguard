@@ -17,7 +17,7 @@ A Telegram robot for easy management of Telegram and prevention of spam of peopl
 * Use the word info to get the group ID.
 `info`
 
-##Database Structure
+## Database Structure
 
 Name | Type | Collation | Null | Default |Extra
 ------------ | ------------- | ------------- | ------------- | ------------- | -------------
