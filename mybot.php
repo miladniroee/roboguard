@@ -8,13 +8,13 @@ date_default_timezone_set("asia/tehran");
 
 // bot setting
 $bot_id = 'your token here';
-$welcome_message = "on"; // off or on
-$rude_message = "on"; // off or on
+$welcome_message = true; //true or false
+$rude_message = true; //true or false
 $rude_words = ["donkey", "rudeword"]; //your rude words here
 $rude_counter = count($rude_words);
-$channel_or_group_links_dellet = "on"; // off or on
-$sites_links_dellet = "on"; // off or on
-$Dedicate_the_group = ["off", "your group id"]; //on or off | for understanding read line 26
+$channel_or_group_links_delete = true; //true or false
+$sites_links_delete = true; //true or false
+$Dedicate_the_group = [false, "your group id"]; //true or false | for understanding read line 26
 //data base
 $dbuser = "your db user here";
 $dbpass = "your db password here";
@@ -26,8 +26,8 @@ $dbtable = "your db table here"; //for understanding better read line 23
 // To find out your group ID, first turn off the $Dedicate_the_group status, then add the robot to your group and type the word info so that the robot can tell you its group ID.
 
 
-$fxfx = explode(":", $bot_id);
-$Dedicate_the_group[2] = $fxfx[0];
+$bot_id_explode = explode(":", $bot_id);
+$Dedicate_the_group[2] = $bot_id_explode[0];
 // Instances the class
 $telegram = new Telegram($bot_id);
 
@@ -58,7 +58,7 @@ if ($msgType == 'message') {
 
 
 if ($msgType == 'new_chat_member') {
-	if ($welcome_message == "on") {
+	if ($welcome_message) {
 		$content = ['chat_id' => $chat_id, 'text' => "Hi $name
 		You are very welcome to our group
 		⏰ Time to join our group:
@@ -83,7 +83,7 @@ if ($msgType == 'reply') {
 			$content = ['chat_id' => $chat_id, 'user_id' => $replyUserId];
 			$telegram->kickChatMember($content);
 
-			$content = ['chat_id' => $chat_id, 'text' => "this user $replyUsernamee
+			$content = ['chat_id' => $chat_id, 'text' => "this user $replyUsername
 				The user was expelled from the group. Please observe the etiquette and order of the group
 				Thanks Robo Guard."];
 			$telegram->sendMessage($content);
@@ -258,7 +258,7 @@ if (
 
 
 if ($msgType == 'message' || $msgType == 'photo' || $msgType == 'video' || $msgType == 'animation' || $msgType == 'document') {
-	if ($channel_or_group_links_dellet == "on") {
+	if ($channel_or_group_links_delete) {
 		$pattern = "/(?<!\w)@\w+/";
 		if (preg_match($pattern, $text)) {
 
@@ -272,7 +272,7 @@ if ($msgType == 'message' || $msgType == 'photo' || $msgType == 'video' || $msgT
 }
 
 if ($msgType == 'message' || $msgType == 'photo' || $msgType == 'video' || $msgType == 'animation' || $msgType == 'document') {
-	if ($rude_message == "on") {
+	if ($rude_message) {
 		for ($fffc = 0; $fffc < $rude_counter; $fffc++) {
 			$fxsam = $rude_words[$fffc];
 			$pattern = "/$fxsam/";
@@ -296,7 +296,7 @@ if ($msgType == 'forwarded') {
 	}
 }
 if ($msgType == 'message' || $msgType == 'photo' || $msgType == 'video' || $msgType == 'animation' || $msgType == 'document') {
-	if ($Dedicate_the_group[0] == "on") {
+	if ($Dedicate_the_group[0]) {
 		if ($chat_id == $Dedicate_the_group[1]) {
 		} else {
 			$content = ['chat_id' => $chat_id, 'text' => "We're sorry, but this robot in your group can not do anything.
@@ -309,7 +309,7 @@ if ($msgType == 'message' || $msgType == 'photo' || $msgType == 'video' || $msgT
 }
 
 if ($msgType == 'message' || $msgType == 'photo' || $msgType == 'video' || $msgType == 'animation' || $msgType == 'document') {
-	if ($sites_links_dellet == "on") {
+	if ($sites_links_delete) {
 		$pattern = "/((((http|https|ftp|ftps)\:\/\/)|www\.)?[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,4}(\/\S*)?)/i";
 		if (preg_match($pattern, $text)) {
 			if ($join_status == 'administrator' || $join_status == 'creator') {
